@@ -1,0 +1,271 @@
+0000 0000 - NOP
+0000 0001 - NOP
+0000 0010 - NOP
+0000 0011 - NOP
+0000 0100 - NOP
+0000 0101 - NOP
+0000 0110 - NOP
+0000 0111 - NOP
+0000 1000 - NOP
+0000 1001 - NOP
+0000 1010 - NOP
+0000 1011 - NOP
+0000 1100 - NOP
+0000 1101 - NOP
+0000 1110 - NOP
+0000 1111 - NOP
+
+0001 0000 - ADDA            // Add value in register B to value in register A
+0001 0001 - SUBA            // Subtract value in register B from value in register A
+0001 0010 - INCA            // Increment value in register A
+0001 0011 - DECA            // Decrement value in register A
+0001 0100 - ANDA            // Bitwise and value in register B and value in register A and store result in register A
+0001 0101 - ORA             // Bitwise or value in register B and value in register A and store result in register A
+0001 0110 - XORA            // Bitwise xor value in register B and value in register A and store result in register A
+0001 0111 - NOTA            // Bitwise negate value in register A
+0001 1000 - SHLA            // Left shift value in register A logically by value in register B
+0001 1001 - SHRA            // Right shift value in register A logically by value in register B
+0001 1010 - ASLA            // Left shift value in register A arithmetically by value in register B
+0001 1011 - ASRA            // Right shift value in register A arithmetically by value in register B
+0001 1100 - GTA             // Write to register A if value in register A is greater than value in register B
+0001 1101 - EQA             // Write to register A if value in register A is equal to value in register B
+0001 1110 - NOP
+0001 1111 - NOP
+
+0010 0000 - LDA  #ADDRESS  // Load value at #ADDRESS into register A
+0010 0001 - LDB  #ADDRESS  // Load value at #ADDRESS into register B
+0010 0010 - LDO  #ADDRESS  // Load value at #ADDRESS into output register
+0010 0011 - NOP
+0010 0100 - NOP
+0010 0101 - NOP
+0010 0110 - NOP
+0010 0111 - NOP
+0010 1000 - STA  #ADDRESS  // Store value in register A into #ADDRESS
+0010 1001 - STB  #ADDRESS  // Store value in register B into #ADDRESS
+0010 1010 - NOP
+0010 1011 - NOP
+0010 1100 - CPAB           // Copy value in register A to register B
+0010 1101 - CPBA           // Copy value in register B to register A
+0010 1110 - CPAD           // Copy value in register A to output register
+0010 1111 - CPBD           // Copy value in register B to output register
+
+0011 0000 - LADDA #ADDRESS  // Add value at #ADDRESS to value in register A
+0011 0001 - LSUBA #ADDRESS  // Subtract value at #ADDRESS from value in register A
+0011 0010 - LINCA #ADDRESS  // Load value at #ADDRESS into register A and increment it
+0011 0011 - LDECA #ADDRESS  // Load value at #ADDRESS into register A and decrement it
+0011 0100 - LANDA #ADDRESS  // Bitwise and value at #ADDRESS and value in register A and store result in register A
+0011 0101 - LORA  #ADDRESS  // Bitwise or value at #ADDRESS and value in register A and store result in register A
+0011 0110 - LXORA #ADDRESS  // Bitwise xor value at #ADDRESS and value in register A and store result in register A
+0011 0111 - LNOTA #ADDRESS  // Load value at #ADDRESS into register A and bitwise negate it
+0011 1000 - LSHLA #ADDRESS  // Left shift value in register A logically by value at #ADDRESS
+0011 1001 - LSHRA #ADDRESS  // Right shift value in register A logically by value at #ADDRESS
+0011 1010 - LASLA #ADDRESS  // Left shift value in register A arithmetically by value at #ADDRESS
+0011 1011 - LASRA #ADDRESS  // Right shift value in register A arithmetically by value at #ADDRESS
+0011 1100 - LGTA  #ADDRESS  // Write to register A if value in register A is greater than value at #ADDRESS
+0011 1101 - LEQA  #ADDRESS  // Write to register A if value in register A is equal to value at #ADDRESS
+0011 1110 - NOP
+0011 1111 - NOP
+
+0100 0000 - OLDA  #ADDRESS  // Load value at (#ADDRESS + value in register B) into register A
+0100 0001 - OLDB  #ADDRESS  // Load value at (#ADDRESS + value in register A) into register B
+0100 0010 - OLDO  #ADDRESS  // Load value at (#ADDRESS + value in register A) into output register
+0100 0011 - NOP
+0100 0100 - NOP
+0100 0101 - NOP
+0100 0110 - NOP
+0100 0111 - NOP
+0100 1000 - OSTA  #ADDRESS  // Store value in register A into (#ADDRESS + value in register B)
+0100 1001 - OSTB  #ADDRESS  // Store value in register B into (#ADDRESS + value in register A)
+0100 1010 - NOP
+0100 1011 - NOP
+0100 1100 - NOP
+0100 1101 - NOP
+0100 1110 - NOP
+0100 1111 - NOP
+
+0101 0000 - CADDA #CONSTANT  // Add value #CONSTANT to value in register A
+0101 0001 - CSUBA #CONSTANT  // Subtract value #CONSTANT from value in register A
+0101 0010 - NOP
+0101 0011 - NOP
+0101 0100 - CANDA #CONSTANT  // Bitwise and value #CONSTANT and value in register A and store result in register A
+0101 0101 - CORA  #CONSTANT  // Bitwise or value #CONSTANT and value in register A and store result in register A
+0101 0110 - CXORA #CONSTANT  // Bitwise xor value #CONSTANT and value in register A and store result in register A
+0101 0111 - NOP
+0101 1000 - CSHLA #CONSTANT  // Left shift value in register A logically by value #CONSTANT
+0101 1001 - CSHRA #CONSTANT  // Right shift value in register A logically by value #CONSTANT
+0101 1010 - CASLA #CONSTANT  // Left shift value in register A arithmetically by value #CONSTANT
+0101 1011 - CASRA #CONSTANT  // Right shift value in register A arithmetically by value #CONSTANT
+0101 1100 - CGTA  #CONSTANT  // Write to register A if value in register A is greater than value #CONSTANT
+0101 1101 - CEQA  #CONSTANT  // Write to register A if value in register A is equal to value #CONSTANT
+0101 1110 - NOP
+0101 1111 - NOP
+
+0110 0000 - CLDA  #CONSTANT // Load value #CONSTANT into register A
+0110 0001 - CLDB  #CONSTANT // Load value #CONSTANT into register B
+0110 0010 - CLDO  #CONSTANT // Load value #CONSTANT into output register
+0110 0011 - NOP
+0110 0100 - NOP
+0110 0101 - NOP
+0110 0110 - NOP
+0110 0111 - NOP
+0110 1000 - CST   #CONSTANT #ADDRESS // Load value #CONSTANT into #ADDRESS
+0110 1001 - NOP
+0110 1010 - NOP
+0110 1011 - NOP
+0110 1100 - NOP
+0110 1101 - NOP
+0110 1110 - NOP
+0110 1111 - NOP
+
+0111 0000 - NOP
+0111 0001 - NOP
+0111 0010 - NOP
+0111 0011 - NOP
+0111 0100 - NOP
+0111 0101 - NOP
+0111 0110 - NOP
+0111 0111 - NOP
+0111 1000 - NOP
+0111 1001 - NOP
+0111 1010 - NOP
+0111 1011 - NOP
+0111 1100 - NOP
+0111 1101 - NOP
+0111 1110 - NOP
+0111 1111 - NOP
+
+1000 0000 - NOP
+1000 0001 - NOP
+1000 0010 - NOP
+1000 0011 - NOP
+1000 0100 - NOP
+1000 0101 - NOP
+1000 0110 - NOP
+1000 0111 - NOP
+1000 1000 - NOP
+1000 1001 - NOP
+1000 1010 - NOP
+1000 1011 - NOP
+1000 1100 - NOP
+1000 1101 - NOP
+1000 1110 - NOP
+1000 1111 - NOP
+
+1001 0000 - ADDB            // Add value in register A to value in register B
+1001 0001 - SUBB            // Subtract value in register A from value in register B
+1001 0010 - INCB            // Increment value in register B
+1001 0011 - DECB            // Decrement value in register B
+1001 0100 - ANDB            // Bitwise and value in register A and value in register B and store result in register B
+1001 0101 - ORB             // Bitwise or value in register A and value in register B and store result in register B
+1001 0110 - XORB            // Bitwise xor value in register A and value in register B and store result in register B
+1001 0111 - NOTB            // Bitwise negate value in register B
+1001 1000 - SHLB            // Left shift value in register B logically by value in register A
+1001 1001 - SHRB            // Right shift value in register B logically by value in register A
+1001 1010 - ASLB            // Left shift value in register B arithmetically by value in register A
+1001 1011 - ASRB            // Right shift value in register B arithmetically by value in register A
+1001 1100 - GTB             // Write to register B if value in register A is greater than value in register A
+1001 1101 - EQB             // Write to register B if value in register A is equal to value in register A
+1001 1110 - NOP
+1001 1111 - NOP
+
+1010 0000 - NOP
+1010 0001 - NOP
+1010 0010 - NOP
+1010 0011 - NOP
+1010 0100 - NOP
+1010 0101 - NOP
+1010 0110 - NOP
+1010 0111 - NOP
+1010 1000 - NOP
+1010 1001 - NOP
+1010 1010 - NOP
+1010 1011 - NOP
+1010 1100 - NOP
+1010 1101 - NOP
+1010 1110 - NOP
+1010 1111 - NOP
+
+1011 0000 - LADDB #ADDRESS  // Add value at #ADDRESS to value in register B
+1011 0001 - LSUBB #ADDRESS  // Subtract value at #ADDRESS from value in register B
+1011 0010 - LINCB #ADDRESS  // Load value at #ADDRESS into register B and increment it
+1011 0011 - LDECB #ADDRESS  // Load value at #ADDRESS into register B and decrement it
+1011 0100 - LANDB #ADDRESS  // Bitwise and value at #ADDRESS and value in register B and store result in register B
+1011 0101 - LORB  #ADDRESS  // Bitwise or value at #ADDRESS and value in register B and store result in register B
+1011 0110 - LXORB #ADDRESS  // Bitwise xor value at #ADDRESS and value in register A and store result in register B
+1011 0111 - LNOTB #ADDRESS  // Load value at #ADDRESS into register B and bitwise negate it
+1011 1000 - LSHLB #ADDRESS  // Left shift value in register B logically by value at #ADDRESS
+1011 1001 - LSHRB #ADDRESS  // Right shift value in register B logically by value at #ADDRESS
+1011 1010 - LASLB #ADDRESS  // Left shift value in register B arithmetically by value at #ADDRESS
+1011 1011 - LASRB #ADDRESS  // Right shift value in register B arithmetically by value at #ADDRESS
+1011 1100 - LGTB  #ADDRESS  // Write to register B if value in register B is greater than value at #ADDRESS
+1011 1101 - LEQB  #ADDRESS  // Write to register B if value in register B is equal to value at #ADDRESS
+1011 1110 - NOP
+1011 1111 - NOP
+
+1100 0000 - NOP
+1100 0001 - NOP
+1100 0010 - NOP
+1100 0011 - NOP
+1100 0100 - NOP
+1100 0101 - NOP
+1100 0110 - NOP
+1100 0111 - NOP
+1100 1000 - NOP
+1100 1001 - NOP
+1100 1010 - NOP
+1100 1011 - NOP
+1100 1100 - NOP
+1100 1101 - NOP
+1100 1110 - NOP
+1100 1111 - NOP
+
+1101 0000 - CADDB #CONSTANT  // Add value #CONSTANT to value in register B
+1101 0001 - CSUBB #CONSTANT  // Subtract value #CONSTANT from value in register B
+1101 0010 - NOP
+1101 0011 - NOP
+1101 0100 - CANDB #CONSTANT  // Bitwise and value #CONSTANT and value in register B and store result in register B
+1101 0101 - CORB  #CONSTANT  // Bitwise or value #CONSTANT and value in register B and store result in register B
+1101 0110 - CXORB #CONSTANT  // Bitwise xor value #CONSTANT and value in register B and store result in register B
+1101 0111 - NOP
+1101 1000 - CSHLB #CONSTANT  // Left shift value in register B logically by value #CONSTANT
+1101 1001 - CSHRB #CONSTANT  // Right shift value in register B logically by value #CONSTANT
+1101 1010 - CASLB #CONSTANT  // Left shift value in register B arithmetically by value #CONSTANT
+1101 1011 - CASRB #CONSTANT  // Right shift value in register B arithmetically by value #CONSTANT
+1101 1100 - CGTB  #CONSTANT  // Write to register B if value in register B is greater than value #CONSTANT
+1101 1101 - CEQB  #CONSTANT  // Write to register B if value in register B is equal to value #CONSTANT
+1101 1110 - NOP
+1101 1111 - NOP
+
+1110 0000 - NOP
+1110 0001 - NOP
+1110 0010 - NOP
+1110 0011 - NOP
+1110 0100 - NOP
+1110 0101 - NOP
+1110 0110 - NOP
+1110 0111 - NOP
+1110 1000 - NOP
+1110 1001 - NOP
+1110 1010 - NOP
+1110 1011 - NOP
+1110 1100 - NOP
+1110 1101 - NOP
+1110 1110 - NOP
+1110 1111 - NOP
+
+1111 0000 - JMP  #ADDRESS  // Unconditionally jump to #ADDRESS
+1111 0001 - NOP
+1111 0010 - JMPA           // Unconditionally jump to the address specified in register A
+1111 0011 - JMPB           // Unconditionally jump to the address specified in register B
+1111 0100 - NOP
+1111 0101 - NOP
+1111 0110 - NOP
+1111 0111 - NOP
+1111 1000 - BC   #ADDRESS  // Branch to #ADDRESS if the carry flag is set
+1111 1001 - BNC  #ADDRESS  // Branch to #ADDRESS if the carry flag is not set
+1111 1010 - BZ   #ADDRESS  // Branch to #ADDRESS if the zero flag is set
+1111 1011 - BNZ  #ADDRESS  // Branch to #ADDRESS if the zero flag is not set
+1111 1100 - BO   #ADDRESS  // Branch to #ADDRESS if the overflow flag is set
+1111 1101 - BNO  #ADDRESS  // Branch to #ADDRESS if the overflow flag is not set
+1111 1110 - NOP
+1111 1111 - HLT

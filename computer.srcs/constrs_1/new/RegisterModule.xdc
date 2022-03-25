@@ -1,0 +1,36 @@
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets Clock_IBUF]
+
+set_property PACKAGE_PIN V17 [get_ports {BusIn[0]}]
+set_property PACKAGE_PIN V16 [get_ports {BusIn[1]}]
+set_property PACKAGE_PIN W16 [get_ports {BusIn[2]}]
+set_property PACKAGE_PIN W17 [get_ports {BusIn[3]}]
+set_property PACKAGE_PIN W15 [get_ports {BusIn[4]}]
+set_property PACKAGE_PIN V15 [get_ports {BusIn[5]}]
+set_property PACKAGE_PIN W14 [get_ports {BusIn[6]}]
+set_property PACKAGE_PIN W13 [get_ports {BusIn[7]}]
+set_property PACKAGE_PIN T1  [get_ports {InputEnable}]
+set_property PACKAGE_PIN R2  [get_ports {OutputEnable}]
+
+set_property PACKAGE_PIN U16 [get_ports {BusOut[0]}]
+set_property PACKAGE_PIN E19 [get_ports {BusOut[1]}]
+set_property PACKAGE_PIN U19 [get_ports {BusOut[2]}]
+set_property PACKAGE_PIN V19 [get_ports {BusOut[3]}]
+set_property PACKAGE_PIN W18 [get_ports {BusOut[4]}]
+set_property PACKAGE_PIN U15 [get_ports {BusOut[5]}]
+set_property PACKAGE_PIN U14 [get_ports {BusOut[6]}]
+set_property PACKAGE_PIN V14 [get_ports {BusOut[7]}]
+
+set_property PACKAGE_PIN V13 [get_ports {Q[0]}]
+set_property PACKAGE_PIN V3  [get_ports {Q[1]}]
+set_property PACKAGE_PIN W3  [get_ports {Q[2]}]
+set_property PACKAGE_PIN U3  [get_ports {Q[3]}]
+set_property PACKAGE_PIN P3  [get_ports {Q[4]}]
+set_property PACKAGE_PIN N3  [get_ports {Q[5]}]
+set_property PACKAGE_PIN P1  [get_ports {Q[6]}]
+set_property PACKAGE_PIN L1  [get_ports {Q[7]}]
+
+set_property PACKAGE_PIN W19 [get_ports {Clock}]
+set_property PACKAGE_PIN T17 [get_ports {Reset}]
+
+
+set_property IOSTANDARD LVCMOS33 [get_ports {BusIn InputEnable OutputEnable BusOut Q Clock Reset}]
