@@ -9,11 +9,19 @@ module N_USPerCycle_Clock #(
 
     reg [(num_bits_cycle_counter - 1):0] cycleCounter;
 
-    always @(posedge Clock100MHzIn)
+
+    initial
     begin
-        cycleCounter <= cycleCounter + 1;
+        cycleCounter = 0;
     end
 
-    assign ClockOut = cycleCounter[num_bits_cycle_counter - 1];
+
+    always @(posedge Clock100MHzIn)
+    begin
+        cycleCounter <= (cycleCounter >= US_PER_CYCLE * 100) ? 0 : cycleCounter + 1;
+    end
+
+
+    assign ClockOut = (cycleCounter < US_PER_CYCLE * 50) ? 1'b0 : 1'b1;
 
 endmodule

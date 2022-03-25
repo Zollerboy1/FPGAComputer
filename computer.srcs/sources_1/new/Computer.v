@@ -33,50 +33,38 @@ module Computer(
     wire [7:0] bus, ramQ, registerAQ, registerBQ;
     wire [21:0] controlWord;
     wire clock, selectedClock, carryFlag, zeroFlag, overflowFlag;
+    wire debouncedManualClock, debouncedProgramModeClock, debouncedProgramModeToggle, debouncedClockToggle;
 
-    reg programMode, manualClock;
-    reg [25:0] programModeCoolDown, manualClockCoolDown;
+    reg programMode, manualClockEnable;
 
 
     initial begin
         programMode = 1'b0;
-        programModeCoolDown = 0;
-        manualClock = 1'b1;
-        manualClockCoolDown = 0;
+        manualClockEnable = 1'b1;
     end
 
 
-    always @(posedge Clock100MHz, posedge ProgramModeToggle) begin
-        if (ProgramModeToggle && (programModeCoolDown == 0)) begin
-            programMode <= ~programMode;
-            programModeCoolDown <= 1;
-        end
-        else if (Clock100MHz) begin
-            if (programModeCoolDown != 0)
-                programModeCoolDown <= programModeCoolDown + 1;
-        end
+    ButtonDebouncer manualClockDebouncer(ManualClock, Clock100MHz, debouncedManualClock);
+    ButtonDebouncer programModeClockDebouncer(ProgramModeClock, Clock100MHz, debouncedProgramModeClock);
+    ButtonDebouncer programModeToggleDebouncer(ProgramModeToggle, Clock100MHz, debouncedProgramModeToggle);
+    ButtonDebouncer clockToggleDebouncer(ClockToggle, Clock100MHz, debouncedClockToggle);
+
+    always @(posedge debouncedProgramModeToggle) begin
+        programMode <= ~programMode;
     end
 
-
-    always @(posedge Clock100MHz, posedge ClockToggle) begin
-        if (ClockToggle && (manualClockCoolDown == 0)) begin
-            manualClock <= ~manualClock;
-            manualClockCoolDown <= 1;
-        end
-        else if (Clock100MHz) begin
-            if (manualClockCoolDown != 0)
-                manualClockCoolDown <= manualClockCoolDown + 1;
-        end
+    always @(posedge debouncedClockToggle) begin
+        manualClockEnable <= ~manualClockEnable;
     end
 
 
     ClockModule clockModule(
         .Clock100MHz(Clock100MHz),
-        .Halt(controlWord[0]),
+        .Halt(controlWord[0] | programMode),
         .ClockOut(clock)
     );
 
-    N_Bit_Multiplexer2To1 #(1) clockSelect(clock, ManualClock, manualClock, selectedClock);
+    N_Bit_Multiplexer2To1 #(1) clockSelect(clock, debouncedManualClock, manualClockEnable, selectedClock);
 
 
     RAMModule ramModule(
@@ -85,7 +73,7 @@ module Computer(
         .ProgramModeDataIn(ProgramModeDataIn),
         .Clock(selectedClock),
         .ProgramModeEnable(programMode),
-        .ProgramModeClock(ProgramModeClock),
+        .ProgramModeClock(debouncedProgramModeClock),
         .AddressEnable(controlWord[1]),
         .RAMInputEnable(controlWord[2]),
         .RAMOutputEnable(controlWord[3]),
