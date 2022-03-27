@@ -32,17 +32,18 @@
 //     - 15: ALUSelect[2]
 //     - 16: ALUSelect[3]
 //     - 17: ALUOutputEnable
-//     - 18: FlagsEnable
-//     - 19: BInputEnable
-//     - 20: BOutputEnable
-//     - 21: DisplayInputEnable
+//     - 18: SwitchAB
+//     - 19: FlagsEnable
+//     - 20: BInputEnable
+//     - 21: BOutputEnable
+//     - 22: DisplayInputEnable
 
 module InstructionDecoder(
     input [13:0] Instruction,
-    output [21:0] ControlWord
+    output [22:0] ControlWord
 );
 
-    reg [21:0] controlWordROM [((1 << 14) - 1):0];
+    reg [22:0] controlWordROM [((1 << 14) - 1):0];
     
 
     initial begin

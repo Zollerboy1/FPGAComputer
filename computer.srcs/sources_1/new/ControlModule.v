@@ -17,17 +17,18 @@
 //     - 15: ALUSelect[2]
 //     - 16: ALUSelect[3]
 //     - 17: ALUOutputEnable
-//     - 18: FlagsEnable
-//     - 19: BInputEnable
-//     - 20: BOutputEnable
-//     - 21: DisplayInputEnable
+//     - 18: SwitchAB
+//     - 19: FlagsEnable
+//     - 20: BInputEnable
+//     - 21: BOutputEnable
+//     - 22: DisplayInputEnable
 
 module ControlModule(
     input [7:0] BusIn,
     input Clock, InstructionEnable, OperandInputEnable, OperandOutputEnable, MicroInstructionReset, Reset,
     input CarryFlag, ZeroFlag, OverflowFlag,
     output [7:0] BusOut,
-    output [21:0] ControlWord
+    output [22:0] ControlWord
 );
 
     wire [7:0] instruction, operandOutput;

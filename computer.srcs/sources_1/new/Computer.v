@@ -17,10 +17,11 @@
 //     - 15: ALUSelect[2]
 //     - 16: ALUSelect[3]
 //     - 17: ALUOutputEnable
-//     - 18: FlagsEnable
-//     - 19: BInputEnable
-//     - 20: BOutputEnable
-//     - 21: DisplayInputEnable
+//     - 18: SwitchAB
+//     - 19: FlagsEnable
+//     - 20: BInputEnable
+//     - 21: BOutputEnable
+//     - 22: DisplayInputEnable
 
 module Computer(
     input [7:0] ProgramModeAddressIn, ProgramModeDataIn,
@@ -31,7 +32,7 @@ module Computer(
 );
 
     wire [7:0] bus, ramQ, registerAQ, registerBQ;
-    wire [21:0] controlWord;
+    wire [22:0] controlWord;
     wire clock, selectedClock, carryFlag, zeroFlag, overflowFlag;
     wire debouncedManualClock, debouncedProgramModeClock, debouncedProgramModeToggle, debouncedClockToggle;
 
@@ -127,7 +128,8 @@ module Computer(
         .ALUSelect(controlWord[16:13]),
         .Clock(selectedClock),
         .ALUOutputEnable(controlWord[17]),
-        .FlagsEnable(controlWord[18]),
+        .SwitchAB(controlWord[18]),
+        .FlagsEnable(controlWord[19]),
         .Reset(Reset),
         .Bus(bus),
         .CarryFlag(carryFlag),
@@ -139,8 +141,8 @@ module Computer(
     RegisterModule registerBModule(
         .BusIn(bus),
         .Clock(selectedClock),
-        .RegisterInputEnable(controlWord[19]),
-        .RegisterOutputEnable(controlWord[20]),
+        .RegisterInputEnable(controlWord[20]),
+        .RegisterOutputEnable(controlWord[21]),
         .Reset(Reset),
         .BusOut(bus),
         .Q(registerBQ)
@@ -150,7 +152,7 @@ module Computer(
     DisplayModule displayModule(
         .Bus(bus),
         .Clock(selectedClock),
-        .DisplayInputEnable(controlWord[21]),
+        .DisplayInputEnable(controlWord[22]),
         .Reset(Reset),
         .Clock100MHz(Clock100MHz),
         .Anodes(Anodes),

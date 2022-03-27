@@ -19,17 +19,22 @@
 module ALUModule(
     input [7:0] RegisterA, RegisterB,
     input [3:0] ALUSelect,
-    input Clock, ALUOutputEnable, FlagsEnable, Reset,
+    input Clock, ALUOutputEnable, SwitchAB, FlagsEnable, Reset,
     output [7:0] Bus,
     output CarryFlag, ZeroFlag, OverflowFlag
 );
 
-    wire [7:0] internalBus;
+    wire [7:0] a, b, internalBus;
     wire carryFlag, zeroFlag, overflowFlag;
 
+
+    N_Bit_Multiplexer2To1 #(8) selectA(RegisterA, RegisterB, SwitchAB, a);
+    N_Bit_Multiplexer2To1 #(8) selectB(RegisterB, RegisterA, SwitchAB, b);
+
+
     N_Bit_ALU #(8) alu(
-        .A(RegisterA),
-        .B(RegisterB),
+        .A(a),
+        .B(b),
         .Select(ALUSelect),
         .O(internalBus),
         .CarryFlag(carryFlag),
