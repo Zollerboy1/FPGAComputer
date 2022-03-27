@@ -163,8 +163,8 @@
 1001 1001 - SHRB            // Right shift value in register B logically by value in register A
 1001 1010 - ASLB            // Left shift value in register B arithmetically by value in register A
 1001 1011 - ASRB            // Right shift value in register B arithmetically by value in register A
-1001 1100 - GTB             // Write to register B if value in register A is greater than value in register A
-1001 1101 - EQB             // Write to register B if value in register A is equal to value in register A
+1001 1100 - GTB             // Write to register B if value in register B is greater than value in register A
+1001 1101 - EQB             // Write to register B if value in register B is equal to value in register A
 1001 1110 - NOP
 1001 1111 - NOP
 
