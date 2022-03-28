@@ -5,7 +5,7 @@ module ClockModule(
 
     wire internalClock;
 
-    N_USPerCycle_Clock #(50000) clock(Clock100MHz, internalClock);
+    N_USPerCycle_Clock #(1000) clock(Clock100MHz, internalClock);
 
 
     assign ClockOut = ~Halt & internalClock;

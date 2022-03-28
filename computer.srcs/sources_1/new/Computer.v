@@ -34,7 +34,7 @@ module Computer(
     wire [7:0] bus, ramQ, registerAQ, registerBQ;
     wire [22:0] controlWord;
     wire clock, selectedClock, carryFlag, zeroFlag, overflowFlag;
-    wire debouncedManualClock, debouncedProgramModeClock, debouncedProgramModeToggle, debouncedClockToggle;
+    wire debouncedManualClock, debouncedProgramModeClock, debouncedProgramModeToggle, debouncedClockToggle, debouncedReset;
 
     reg programMode, manualClockEnable;
 
@@ -49,13 +49,17 @@ module Computer(
     ButtonDebouncer programModeClockDebouncer(ProgramModeClock, Clock100MHz, debouncedProgramModeClock);
     ButtonDebouncer programModeToggleDebouncer(ProgramModeToggle, Clock100MHz, debouncedProgramModeToggle);
     ButtonDebouncer clockToggleDebouncer(ClockToggle, Clock100MHz, debouncedClockToggle);
+    ButtonDebouncer ResetDebouncer(Reset, Clock100MHz, debouncedReset);
 
     always @(posedge debouncedProgramModeToggle) begin
         programMode <= ~programMode;
     end
 
-    always @(posedge debouncedClockToggle) begin
-        manualClockEnable <= ~manualClockEnable;
+    always @(posedge debouncedClockToggle, posedge debouncedReset) begin
+        if (debouncedReset)
+            manualClockEnable <= 1'b1;
+        else
+            manualClockEnable <= ~manualClockEnable;
     end
 
 
@@ -78,7 +82,7 @@ module Computer(
         .AddressEnable(controlWord[1]),
         .RAMInputEnable(controlWord[2]),
         .RAMOutputEnable(controlWord[3]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .BusOut(bus),
         .Q(ramQ)
     );
@@ -91,7 +95,7 @@ module Computer(
         .OperandInputEnable(controlWord[5]),
         .OperandOutputEnable(controlWord[6]),
         .MicroInstructionReset(controlWord[7]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .CarryFlag(carryFlag),
         .ZeroFlag(zeroFlag),
         .OverflowFlag(overflowFlag),
@@ -106,7 +110,7 @@ module Computer(
         .CounterInputEnable(controlWord[8]),
         .CountEnable(controlWord[9]),
         .CounterOutputEnable(controlWord[10]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .BusOut(bus)
     );
 
@@ -116,7 +120,7 @@ module Computer(
         .Clock(selectedClock),
         .RegisterInputEnable(controlWord[11]),
         .RegisterOutputEnable(controlWord[12]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .BusOut(bus),
         .Q(registerAQ)
     );
@@ -130,7 +134,7 @@ module Computer(
         .ALUOutputEnable(controlWord[17]),
         .SwitchAB(controlWord[18]),
         .FlagsEnable(controlWord[19]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .Bus(bus),
         .CarryFlag(carryFlag),
         .ZeroFlag(zeroFlag),
@@ -143,7 +147,7 @@ module Computer(
         .Clock(selectedClock),
         .RegisterInputEnable(controlWord[20]),
         .RegisterOutputEnable(controlWord[21]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .BusOut(bus),
         .Q(registerBQ)
     );
@@ -153,7 +157,7 @@ module Computer(
         .Bus(bus),
         .Clock(selectedClock),
         .DisplayInputEnable(controlWord[22]),
-        .Reset(Reset),
+        .Reset(debouncedReset),
         .Clock100MHz(Clock100MHz),
         .Anodes(Anodes),
         .LEDs(LEDs)
@@ -167,7 +171,7 @@ module Computer(
         end
         else begin
             Bus = bus;
-            ProgramModeRAMQ = 8'b00000000;
+            ProgramModeRAMQ = {selectedClock, 7'b0000000};
         end
     end
 
